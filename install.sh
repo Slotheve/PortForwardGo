@@ -47,9 +47,7 @@ print_white() {
 }
 
 archAffix(){
-    if [[ "$CPU" = "x86_64" ]] || [[ "$CPU" = "amd64" ]]; then
-	exit 1
-    else
+    if [[ "$CPU" != "x86_64" ]] && [[ "$CPU" != "amd64" ]]; then
 	colorEcho $RED " 不支持的CPU架构！"
     fi
 }
