@@ -269,7 +269,25 @@ print_cyan "$PROGRAM installation script"
 
     # Configure program
     {
-        cp -f /opt/PortForwardGo/examples/backend.json /opt/PortForwardGo/config.json
+        cat > /opt/PortForwardGo/examples/backend.json<<-EOF
+    {
+        "Api": "{api}",
+        "License": "{license}",
+        "Secret": "{secret}",
+        "Proxy": "{proxy}",
+        "Speed": 0,
+        "ListenIP": "{listen}",
+        "OutBounds": null,
+        "DisableUDP": false,
+        "DisableTFO": true,
+        "DisableExec": false,
+        "DNS": [
+            "119.29.29.29",
+            "8.8.8.8"
+        ],
+        "FirewallLog": "firewall.log"
+    }
+    EOF
         sed -i "s#{api}#$api#g" /opt/PortForwardGo/config.json
         sed -i "s#{secret}#$secret#g" /opt/PortForwardGo/config.json
         sed -i "s#{license}#$license#g" /opt/PortForwardGo/config.json
