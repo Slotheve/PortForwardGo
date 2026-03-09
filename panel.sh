@@ -14,9 +14,7 @@ colorEcho() {
 }
 
 archAffix(){
-    if [[ "$CPU" = "x86_64" ]] || [[ "$CPU" = "amd64" ]]; then
-	exit 1
-    else
+    if [[ "$CPU" != "x86_64" ]] && [[ "$CPU" != "amd64" ]]; then
 	colorEcho $RED " 不支持的CPU架构！"
     fi
 }
@@ -53,23 +51,23 @@ Install_dependency(){
     if [[ ${OS} == "yum" ]]; then
 	echo ""
 	colorEcho $YELLOW "安装依赖中..."
-	yum install zip unzip wget -y >/dev/null 2>&1
+	yum install unzip wget -y >/dev/null 2>&1
 	echo ""
     else
 	echo ""
 	colorEcho $YELLOW "安装依赖中..."
-	apt install zip unzip wget -y >/dev/null 2>&1
+	apt install unzip wget -y >/dev/null 2>&1
 	echo ""
     fi
 }
 
 Download(){
-    rm -rf /opt/PortForwardGoPanel
+    rm -rf /opt/PortForwardGoPanel PortForwardGoPanel.zip
     archAffix
     DOWNLOAD_LINK="https://raw.githubusercontent.com/Slotheve/PortForwardGo/main/PortForwardGoPanel-linux-amd64.zip"
     colorEcho $YELLOW "下载PortForwardGoPanel: ${DOWNLOAD_LINK}"
     curl -L -H "Cache-Control: no-cache" -o /opt/PortForwardGoPanel.zip ${DOWNLOAD_LINK}
-    unzip /opt/PortForwardGoPanel.zip
+    unzip /opt/PortForwardGoPanel.zip -d /opt >/dev/null 2>&1
 	rm -rf /opt/PortForwardGoPanel.zip
     cp /opt/PortForwardGoPanel/systemd/PortForwardGoPanel.service /etc/systemd/system/PortForwardGoPanel.service
     chmod -R +x /opt/PortForwardGoPanel
@@ -81,8 +79,6 @@ Install(){
     Install_dependency
 	Download
     colorEcho $BLUE "安装完成,请更新/opt/PortForwardGoPanel/config.json后启动"
-    echo ""
-    ShowInfo
 }
 
 Uninstall(){
