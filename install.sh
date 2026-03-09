@@ -1,4 +1,15 @@
 #!/bin/bash
+
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[36m"
+PLAIN='\033[0m'
+
+colorEcho() {
+    echo -e "${1}${@:2}${PLAIN}"
+}
+
 print_black() {
     echo -e "\033[30m$1\033[0m"
 }
