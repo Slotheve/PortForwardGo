@@ -205,7 +205,8 @@ print_cyan "$PROGRAM installation script"
 # Check system
 {
     print_yellow " ** Checking system info..."
-
+    archAffix
+    checkSystem
     # Check systemd
     command -V systemctl >/dev/null
     if [ "$?" -ne 0 ]; then
