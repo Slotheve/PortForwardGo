@@ -71,15 +71,6 @@ Set1(){
 }
 
 Set2(){
-	read -p $'请输入License [授权码]:' license
-	if [[ -z "${license}" ]]; then
-		colorEcho $RED "输入为空, 请重新输入。"
-		echo ""
-		Set2
-	fi
-}
-
-Set3(){
 	read -p $'请输入Secret [密钥]:' secret
 	if [[ -z "${secret}" ]]; then
 		colorEcho $RED "输入为空, 请重新输入。"
@@ -96,7 +87,7 @@ Download(){
     cat > /opt/PortForwardGo/config.json<<-EOF
 {
     "Api": "$api",
-    "License": "$license",
+    "License": "",
     "Secret": "$secret",
     "Proxy": "",
     "Speed": 0,
@@ -105,6 +96,7 @@ Download(){
     "DisableUDP": false,
     "DisableTFO": true,
     "DisableExec": false,
+    "RPC": "google",
     "DNS": [
         "119.29.29.29",
         "8.8.8.8"
@@ -157,8 +149,6 @@ Install(){
     Install_dependency
     Set1
     Set2
-    Set3
-    Set4
 	Download
     colorEcho $BLUE "安装完成"
 }
