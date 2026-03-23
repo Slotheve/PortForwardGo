@@ -360,7 +360,18 @@ print_cyan "$PROGRAM installation script"
     "Api": "{api}",
     "Secret": "{secret}",
     "Proxy": "",
-    "Backup": {backup},
+    "ReportConfig": {
+        "MachineID": "{machine_id}",
+        "IPv4": {
+            "Disabled": {disable_ipv4_report},
+            "Address": ""
+        },
+        "IPv6": {
+            "Disabled": {disable_ipv6_report},
+            "Address": ""
+        },
+        "Backup": {backup}
+    },
     "OutBounds": null,
     "DisableUDP": false,
     "DisableTFO": true,
