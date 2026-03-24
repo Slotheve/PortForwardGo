@@ -105,6 +105,10 @@ menu() {
 	echo -e "  ${GREEN}1.${PLAIN}  安装PortForwardGoPanel"
 	echo -e "  ${GREEN}2.${PLAIN}  ${RED}卸载PortForwardGoPanel${PLAIN}"
 	echo " ----------------------"
+	echo -e "  ${GREEN}3.${PLAIN}  启动PortForwardGoPanel"
+	echo -e "  ${GREEN}4.${PLAIN}  重启PortForwardGoPanel"
+	echo -e "  ${GREEN}5.${PLAIN}  停止PortForwardGoPanel"
+	echo " ----------------------"
 	echo -e "  ${GREEN}0.${PLAIN}  退出"
 	echo ""
 	echo 
@@ -119,6 +123,15 @@ menu() {
 			;;
 		2)
 			Uninstall
+			;;
+		3)
+			systemctl start PortForwardGoPanel
+			;;
+		4)
+			systemctl restart PortForwardGoPanel
+			;;
+		5)
+			systemctl stop PortForwardGoPanel
 			;;
 		*)
 			colorEcho $RED " 请选择正确的操作！"
