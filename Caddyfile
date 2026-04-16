@@ -1,0 +1,22 @@
+xxx.com {
+    tls /etc/caddy/pfgo-cert.pem /etc/caddy/pfgo-key.pem
+
+    @grpc {
+        header Content-Type application/grpc*
+    }
+
+    @websocket {
+        header Connection *Upgrade*
+        header Upgrade websocket
+    }
+
+    reverse_proxy @grpc localhost:8080 {
+        transport http {
+            versions h2c 2
+        }
+    }
+
+    reverse_proxy @websocket localhost:8080
+
+    reverse_proxy localhost:8080
+}
